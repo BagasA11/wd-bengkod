@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DokterController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Middleware\IsDokter;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,9 +19,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     $user = Auth::user();
+
+//     return view('dashboard', ['user'=>$user]);
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+// route::middleware(['auth', IsDokter::class])->group(function (){
+//     Route::get('/users/dokter/jadwal', [DokterController::class, 'create']);
+// });
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -29,3 +36,5 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+require __DIR__.'/dokter.routes.php';
+require __DIR__.'/pasien.routes.php';

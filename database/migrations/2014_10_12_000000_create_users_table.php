@@ -15,11 +15,17 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
+            $table->string('address');
+            $table->string('nik');
+            $table->string('no_hp');
+            $table->string('no_rm')->nullable();
+            $table->string('poli')->nullable();
+            $table->enum('role', ['pasien', 'dokter']);
+            // $table->rememberToken();
+            // $table->timestamps();
         });
+    
     }
 
     /**
