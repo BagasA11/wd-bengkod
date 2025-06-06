@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
-            {{ __('Obat') }}
+            {{ __('Tambah Jadwal') }}
         </h2>
     </x-slot>
 
@@ -25,7 +25,7 @@
                             {{-- Pilih Hari --}}
                             <div class="mb-3 form-group">
                                 <label for="hari" class='me-3'>Hari</label>
-                                <select id="hari">
+                                <select id="hari" name='hari'>
                                     @foreach ($days as $hari)
                                         <option value="{{ $hari }}">{{ $hari }}</option>
                                     @endforeach

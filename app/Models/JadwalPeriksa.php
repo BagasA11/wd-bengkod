@@ -28,7 +28,7 @@ class JadwalPeriksa extends Model
     
     // Manny to One
     public function dokter() {
-        return $this->belongsTo(User::class, 'id_dokter');
+        return $this->belongsTo(User::class);
     }
 
 }

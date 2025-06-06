@@ -11,10 +11,10 @@
                 <section>
                     <header class="flex items-center justify-between">
                         <h2 class="text-lg font-medium text-gray-900">
-                            {{ __('Daftar Obat') }}
+                            {{ __('Jadwal Periksa') }}
                         </h2>
                         <div class="flex-col items-center justify-center text-center">
-                            <a href="{{ route('dokter.jadwal-periksa.create') }}" class="btn btn-primary">Tambah Obat</a>
+                            <a href="{{ route('dokter.jadwal-periksa.create') }}" class="btn btn-primary">Tambah Jadwal</a>
                         
                             @if (session('status') === 'obat-created')
                                 <p
@@ -54,7 +54,7 @@
                                         {{ $jadwal->jam_mulai }}
                                     </td>
                                     <td class="align-middle text-start">
-                                        {{ $jadwal->jam_selsai }}
+                                        {{ $jadwal->jam_selesai }}
                                     </td>
                                     <td class="align-middle text-start">
                                         @if ($jadwal->status)

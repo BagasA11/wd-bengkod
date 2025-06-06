@@ -41,8 +41,37 @@ class JadwalPeriksaController extends Controller
     
     public function store(Request $request)
     {
-        //
-        dd($request);
+        
+        $validated = $request->validate([
+            'hari'=> 'required|string',
+            'jam_mulai'=> 'required|date_format:H:i',
+            'jam_selesai'=> 'required|date_format:H:i|after:jam_mulai',
+        ]);
+
+        if (JadwalPeriksa::where('id_dokter', Auth::user()->id)
+            ->where('hari', $validated['hari'])->where('jam_mulai', $validated['jam_mulai'])
+            ->where('jam_selesai', $validated['jam_selesai'])->exists()
+        ){
+            return redirect()->route('dokter.jadwal-periksa.index');
+        } else{
+            JadwalPeriksa::create([
+                'hari'=>$validated['hari'],
+                'id_dokter'=>Auth::user()->id,
+                'jam_mulai'=>$validated['jam_mulai'],
+                'jam_selesai'=>$validated['jam_selesai'],
+                'status'=>false
+            ]);
+            return redirect()->route('dokter.jadwal-periksa.index');
+        }
+       
+        // JadwalPeriksa::create([
+        //     'hari'=>$validated['hari'],
+        //     'id_dokter'=>Auth::user()->id,
+        //     'jam_mulai'=>$validated['jam_mulai'],
+        //     'jam_selesai'=>$validated['jam_selesai'],
+        //     'status'=>false
+        // ]);
+        // return redirect()->route('dokter.jadwal-periksa.index');
     }
     /**
      * Display the specified resource.
@@ -70,17 +99,18 @@ class JadwalPeriksaController extends Controller
 
     public function enable(string $id){ 
         // JadwalPeriksa::where('id', $id)->update(['status'=>true]);
-        $jadwal = JadwalPeriksa::find($id);
+        $jadwal = JadwalPeriksa::where('id_dokter', Auth::user()->id)->find($id);
         $jadwal->status = true;
+        // $dokterID = $jadwal->dokter()
         $jadwal->save();
-        return redirect()->route('dokter.jadwal-periksa.index', $jadwal->dokter()->id);
+        return redirect()->route('dokter.jadwal-periksa.index', Auth::user()->id);
     }
 
     public function disable(string $id){ 
-        $jadwal = JadwalPeriksa::find($id);
+        $jadwal = JadwalPeriksa::where('id_dokter', Auth::user()->id)->find($id);
         $jadwal->status = false;
         $jadwal->save();
-        return redirect()->route('dokter.jadwal-periksa.index', $jadwal->dokter()->id);
+        return redirect()->route('dokter.jadwal-periksa.index', Auth::user()->id);
     }
 
     /**
@@ -89,9 +119,9 @@ class JadwalPeriksaController extends Controller
     public function destroy(string $id)
     {
         //
-        $jadwal = JadwalPeriksa::find($id);
-        $idDokter = $jadwal->dokter()->id;
+        $jadwal = JadwalPeriksa::where('id_dokter', Auth::user()->id)->find($id);
+        // $idDokter = $jadwal->dokter()->id;
         $jadwal->delete();
-        return redirect()->route('dokter.jadwal-periksa.index', $idDokter);
+        return redirect()->route('dokter.jadwal-periksa.index', Auth::user()->id);
     }
 }
