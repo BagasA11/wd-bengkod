@@ -27,6 +27,20 @@
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
+            <input type="text" hidden>
+            @if(Auth::user()->role == 'dokter')
+                <div class="mb-3 form-group">
+                    <label for="poli" class='me-3'>Poli</label>
+                    <select id="poli" name='poli_id'>
+                        @foreach ($polis as $p)
+                            <option value="{{ $p->id }}" {{ old('poli_id', $user->poli_id) == $p->id ? 'selected' : '' }}>
+                            poli {{ $p->nama_poli }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+            @endif
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div>
@@ -45,6 +59,8 @@
                     @endif
                 </div>
             @endif
+
+
         </div>
 
         <div class="flex items-center gap-4">

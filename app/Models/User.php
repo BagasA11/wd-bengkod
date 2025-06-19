@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\DB;
 // relationships
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class User extends Authenticatable
 {
@@ -29,8 +30,8 @@ class User extends Authenticatable
         'nik',
         'no_hp',
         'no_rm',
-        'poli',
-        'role'
+        'role',
+        'poli_id'
     ];
 
     public function jadwal_periksas() {
@@ -40,6 +41,11 @@ class User extends Authenticatable
     public function janji_periksas() {
         return $this->hasMany(JanjiPeriksa::class, 'id_pasien');
     }
+    
+    public function poli() {
+        return $this->belongsTo(Poli::class, 'poli_id');
+    }
+
 
     public function no_rm(){
         $y = date('Y');

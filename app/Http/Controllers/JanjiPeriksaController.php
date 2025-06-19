@@ -39,10 +39,10 @@ class JanjiPeriksaController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
+    // public function create()
+    // {
+    //     //
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -81,6 +81,13 @@ class JanjiPeriksaController extends Controller
     public function edit(string $id)
     {
         //
+        $jadwal_periksas = JadwalPeriksa::with('dokter')->where('status', true)->get();
+        $janji_periksa = JanjiPeriksa::find($id);
+        // dd($jadwal_periksas);
+        return view('pasien.janji-periksa.edit')->with([
+            'jadwal_periksas'=>$jadwal_periksas,
+            'janji_periksa'=>$janji_periksa
+        ]);
     }
 
     /**
@@ -89,6 +96,18 @@ class JanjiPeriksaController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $validatedData = $request->validate([
+            'id_jadwal_periksa' => 'required|exists:jadwal_periksas,id',
+            'keluhan' => 'required',
+        ]);
+
+        JanjiPeriksa::where('id', $id)->update([
+            'id_jadwal_periksa' => $request->id_jadwal_periksa,
+            'keluhan' => $request->keluhan
+        ]);
+
+        session()->flash('success', 'janji periksa berhasil di update');
+        return redirect()->route('pasien.dashboard');
     }
 
     /**
@@ -97,5 +116,17 @@ class JanjiPeriksaController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function cancel(string $id)
+    {
+        $janji = JanjiPeriksa::with('periksa')->find($id);
+        if(optional($janji->periksa)->exists()){
+            session()->flash('error', 'tidak bisa membatalkan janji yang disetujui oleh dokter');
+            return redirect()->route('pasien.dashboard');
+        } else {
+            $janji->delete();
+            session()->flash('success', 'janji dibatalkan');
+            return redirect()->route('pasien.dashboard');
+        }
     }
 }

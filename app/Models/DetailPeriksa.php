@@ -15,7 +15,7 @@ class DetailPeriksa extends Model
     public $timestamps = false;
     
     protected $fillable = [
-        'id_periksas',
+        'id_periksa',
         'id_obat'
     ];
 
@@ -26,7 +26,7 @@ class DetailPeriksa extends Model
     }
 
     public function periksa(){
-        return $this->belongsTo(Periksa::class, 'id_periksas');
+        return $this->belongsTo(Periksa::class, 'id_periksa');
     }
 
 }

@@ -23,16 +23,18 @@
                             {{ __('Dashboard') }}
                         </x-nav-link>
                         <!-- obat -->
-                        <x-nav-link :href="route('dokter.obat.index')" :active="request()->routeIs('dokter.dashboard')">
+                        <x-nav-link :href="route('dokter.obat.index')" :active="request()->routeIs('dokter.obat.index')">
                             {{ __('Menu Obat') }}
                         </x-nav-link>
                         <!-- jadwal -->
                         <x-nav-link :href="route('dokter.jadwal-periksa.index')" :active="request()->routeIs('dokter.jadwal-periksa.index')">
                             {{ __('jadwal periksa') }}
                         </x-nav-link>
-                        <!-- <x-nav-link :href="route('dokter.jadwal-periksa.index', Auth::user()->id)" :active="request()->routeIs('dokter.jadwal-periksa.index')">
-                            {{ __('jadwal periksa') }}
-                        </x-nav-link> -->
+                        <!-- memeriksa pasien -->
+                        <x-nav-link :href="route('dokter.memeriksa.index')" :active="request()->routeIs('dokter.periksa.index')">
+                            {{ __('Memeriksa') }}
+                        </x-nav-link>
+                        
                     @elseif(Auth::user()->role == 'pasien')
                         <x-nav-link :href="route('pasien.dashboard')" :active="request()->routeIs('pasien.dashboard')">
                             {{ __('Dashboard') }}
@@ -40,6 +42,10 @@
                         <x-nav-link :href="route('pasien.janji-periksa.index')" :active="request()->routeIs('pasien.janji-periksa.index')">
                             {{ __('janji periksa') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('pasien.riwayat-periksa.index')" :active="request()->routeIs('pasien.riwayat-periksa.index')">
+                            {{ __('riwayat periksa') }}
+                        </x-nav-link>
+                       
                     @endif
                 </div>
             </div>

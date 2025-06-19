@@ -23,7 +23,7 @@ class DokterSeeder extends Seeder
                 'address' => 'Jl. Pahlawan No. 123, Jakarta Selatan',
                 'nik' => '3175062505800001',
                 'no_hp' => '081234567890',
-                'poli' => 'Penyakit Dalam',
+                'poli_id' => '1',
             ],
             [
                 'name' => 'Dr. Siti Rahayu, Sp.A',
@@ -33,7 +33,7 @@ class DokterSeeder extends Seeder
                 'address' => 'Jl. Anggrek No. 45, Jakarta Pusat',
                 'nik' => '3175064610790002',
                 'no_hp' => '081234567891',
-                'poli' => 'Anak',
+                'poli_id' => '3',
             ],
             [
                 'name' => 'Dr. Ahmad Wijaya, Sp.OG',
@@ -43,7 +43,7 @@ class DokterSeeder extends Seeder
                 'address' => 'Jl. Melati No. 78, Jakarta Barat',
                 'nik' => '3175061505780003',
                 'no_hp' => '081234567892',
-                'poli' => 'Kebidanan dan Kandungan',
+                'poli_id' => '1',
             ],
             [
                 'name' => 'Dr. Rina Putri, Sp.M',
@@ -53,7 +53,7 @@ class DokterSeeder extends Seeder
                 'address' => 'Jl. Dahlia No. 32, Jakarta Timur',
                 'nik' => '3175062708850004',
                 'no_hp' => '081234567893',
-                'poli' => 'Mata',
+                'poli_id' => '2',
             ],
             [
                 'name' => 'Dr. Doni Pratama, Sp.THT',
@@ -63,7 +63,7 @@ class DokterSeeder extends Seeder
                 'address' => 'Jl. Kenanga No. 56, Jakarta Utara',
                 'nik' => '3175061002820005',
                 'no_hp' => '081234567894',
-                'poli' => 'THT',
+                'poli_id'=>1
             ],
         ];
 

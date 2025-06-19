@@ -13,13 +13,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Periksa extends Model
 {
     use HasFactory;
-    public $timestamps = false;
+
     protected $fillable = [
         'catatan',
         'tgl_periksa',
         'biaya',
-        'id_janji_periksa'
+        'id_janji_periksa',
+        'added_at'
     ];
+
+
+    public $timestamps = false;
 
     // belong to
 

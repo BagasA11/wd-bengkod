@@ -20,13 +20,14 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
+            PoliSeeder::class,
             DokterSeeder::class,
-            // ObatSeeder::class,
-            // UserSeeder::class,
-            // JadwalPeriksaSeeder::class,
-            // JanjiPeriksaSeeder::class,
-            // PeriksaSeeder::class,
-            // DetailPeriksaSeeder::class,
+            ObatSeeder::class,
+            UserSeeder::class,
+            JadwalPeriksaSeeder::class,
+            JanjiPeriksaSeeder::class,
+            PeriksaSeeder::class,
+            DetailPeriksaSeeder::class,
         ]);
     }
 }

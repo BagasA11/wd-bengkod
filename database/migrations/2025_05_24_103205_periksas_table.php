@@ -20,6 +20,8 @@ return new class extends Migration
 
             $table->foreignId('id_janji_periksa')->constrained('janji_periksas')->onDelete('cascade'); // janji periksas - users
             $table->timestamp('added_at');
+            // $table->timestamp('added_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+
             // $table->rememberToken();
             // $table->timestamps();
         });

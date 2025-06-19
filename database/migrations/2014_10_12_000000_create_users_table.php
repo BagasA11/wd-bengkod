@@ -20,8 +20,9 @@ return new class extends Migration
             $table->string('nik');
             $table->string('no_hp');
             $table->string('no_rm')->nullable();
-            $table->string('poli')->nullable();
             $table->enum('role', ['pasien', 'dokter']);
+            $table->unsignedBigInteger('poli_id')->nullable();
+            $table->foreign('poli_id')->references('id')->on('polis')->nullOnDelete();
             // $table->rememberToken();
             // $table->timestamps();
         });

@@ -20,33 +20,30 @@
                             </p>
                         </header>
                         <!-- <a href="{{ route('pasien.janji-periksa.store') }}">tets</a> -->
-                        <form class="mt-6" action="{{ route('pasien.janji-periksa.store') }}" method="POST">
+                        <form class="mt-6" action="{{ route('pasien.janji-periksa.update', $janji_periksa->id) }}" method="POST">
                             @csrf
-                            <div class="form-group">
-                                <label for="formGroupExampleInput">Nomor Rekam Medis</label>
-                                <input type="text" class="rounded form-control" id="formGroupExampleInput"
-                                    placeholder="Example input" value="{{ $no_rm }}" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="dokterSelect">Dokter</label>
+                            @method('PUT')
+                            
+                        <div class="form-group">
+                                <label for="dokterSelect">Jadwal</label>
                                 <select class="form-control" id="dokterSelect" name="id_jadwal_periksa" required>
-                                        <option>Pilih Dokter</option>
-                                    @foreach ($dokters as $dokter)
-                                        @foreach ($dokter->jadwal_periksas as $jadwal)
-                                        <option value="{{$jadwal->id}}">{{ $dokter->name}} 
-                                            specialis {{$dokter->poli.
-                                            ' | '.$jadwal->hari.', '.
-                                            $jadwal->jam_mulai.' - '.$jadwal->jam_selesai}}
+                                        <option>Pilih Jadwal dan Dokter</option>
+                                    @foreach ($jadwal_periksas as $jadwal)
+                                        <option value="{{$jadwal->id}}">
+                                            {{
+                                                $jadwal->dokter->name.' : '.$jadwal->hari.', '.
+                                                $jadwal->jam_mulai.' - '.$jadwal->jam_selesai
+                                            }}
                                         </option>
-                                        @endforeach
-
+                                        
                                     @endforeach
                                 
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="keluhan">Keluhan</label>
-                                <textarea class="form-control" name='keluhan' id="keluhan" rows="3" required></textarea>
+                                <textarea class="form-control" name='keluhan' id="keluhan" rows="3" 
+                                required value="{{ $janji_periksa->keluhan }}"></textarea>
                             </div>
                             <div class="flex items-center gap-4">
                                 <button type="submit" class="btn btn-primary">Submit</button>

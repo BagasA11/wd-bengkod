@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
                 'nik'=>'0001',
                 'no_hp'=>'6282112345678',
                 'role'=>'pasien',
-                'poli'=>null,
+               
                 'no_rm'=>'rm001',
                 'address'=>'Semarang'
             ],
@@ -34,8 +34,8 @@ class UserSeeder extends Seeder
                 'nik'=>'0001',
                 'no_hp'=>'6282112345678',
                 'role'=>'dokter',
-                'poli'=>'umum',
-                'no_rm'=>null,
+              
+             
                 'address'=>'Semarang'
             ]
         ];

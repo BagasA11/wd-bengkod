@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
+use App\Models\Poli;
+
 class ProfileController extends Controller
 {
     /**
@@ -16,7 +18,9 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        $poli = Poli::all();
         return view('profile.edit', [
+            'polis'=>$poli,
             'user' => $request->user(),
         ]);
     }

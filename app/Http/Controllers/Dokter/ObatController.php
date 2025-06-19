@@ -97,12 +97,33 @@ class ObatController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function softdelete(string $id)
     {
         //
         $obat = Obat::find($id);
         $obat->delete();
 
-        return redirect()->route('dokter.obat.index');
+        return redirect()->route('dokter.obat.index')->with('status', 'obat-deleted');
+    }
+
+    public function trash(){
+        $obats = Obat::onlyTrashed()->get();
+        return view('dokter.obat.trash')->with(['obats'=>$obats]);
+    }
+
+    public function recover(string $id){
+         $obats = Obat::onlyTrashed()->find($id);;
+         if ($obats) {
+            $obats->restore();
+            return redirect()->route('dokter.obat.trash')->with('status', 'obat-recovered');
+        } else {
+            return redirect()->route('dokter.obat.trash')->with('error', 'Obat tidak ditemukan atau belum dihapus.');
+        }
+    }
+
+    public function forceDelete($id){
+         $obats = Obat::onlyTrashed()->find($id);
+         $obats->forceDelete();
+         return redirect()->route('dokter.obat.trash');
     }
 }
