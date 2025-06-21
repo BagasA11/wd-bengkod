@@ -15,8 +15,8 @@ class RiwayatPeriksaController extends Controller
     public function index(){
         $janjis = JanjiPeriksa::with([
             'jadwal_periksas.dokter.poli',
-            'periksa'
-        ])->
+            
+        ])->whereHas('periksa')->
         where('id_pasien', Auth::user()->id)->get();
 
         return view('pasien.riwayat-periksa.index')->with([

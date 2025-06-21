@@ -36,5 +36,6 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+require __DIR__.'/admin.routes.php';
 require __DIR__.'/dokter.routes.php';
 require __DIR__.'/pasien.routes.php';

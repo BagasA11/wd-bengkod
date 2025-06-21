@@ -33,6 +33,7 @@
                     <tr>
                         <th scope="col">id</th>
                         <th scope="col">nomor antrian</th>
+                        <th scope="col">status</th>
                         <th scope="col">keluhan</th>
                         <th scope="col">hari</th>
                         <th scope="col">jam</th>
@@ -40,7 +41,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($pasien->janji_periksas as $janji_periksa)
+                    @foreach ($janji_periksas as $janji_periksa)
+                    @if(is_null($janji_periksa->periksa))
                         <tr>
                             <th scope="row" class="align-middle text-start">
                                 
@@ -48,6 +50,11 @@
                             </th>
                             <td class="align-middle text-start">
                                 {{ $janji_periksa->no_antrian }}
+                            </td>
+                            <td class="align-middle text-start">
+                                <span class="badge badge-pill badge-warning">
+                                    {{'Belum Diperiksa'}}
+                                </span>
                             </td>
                             <td class="align-middle text-start">
                                 {{ $janji_periksa->keluhan }}
@@ -83,6 +90,7 @@
 
                             
                         </tr>
+                    @endif
                         <tr></tr>
                     @endforeach
                 </tbody>
